@@ -4,6 +4,7 @@ import Header from "./components/Header.js"
 import Form from "./components/Form.js"
 import Todo from "./components/Todo.js"
 import Todone from "./components/Todone.js"
+import './components/Style.css'
 
 function App() {
   return (
