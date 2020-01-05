@@ -9,7 +9,7 @@ class Todo extends React.Component {
                 </div>
                 <div className="col-12 col-sm-2">
                      {this.props.important === true &&
-                        <p>🚩</p>
+                        <p> <span className="flag">🚩</span></p>
                     }
                 </div>
                 <div className="col-12 col-sm-3">

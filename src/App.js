@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from "uuid/v4";
 import './App.css';
 import './components/Style.css'
 import Header from "./components/Header.js"
@@ -19,6 +20,30 @@ class App extends React.Component {
       { task: "Work overtime", important: true, complete: false, dueDate: "2019-12-25", id: 6 },
     ]
   }
+  // add task - form
+  // delete task - todo and todone
+  // complete task - todo
+  // put line through todone?
+
+  addTodo = (task, dueDate, important) => {
+    console.log(task, dueDate, important)
+    const newTask = {
+      task: task,
+      important: false,
+      complete: false,
+      dueDate: dueDate,
+      id: uuid()
+    }
+
+    const copy = this.state.tasks.slice();
+    copy.push(newTask)
+    console.log(copy)
+
+    this.setState({
+      tasks: copy
+    })
+  }
+
   render() {
 
     const todoTasks = this.state.tasks.filter(todo => {
@@ -33,7 +58,7 @@ class App extends React.Component {
       <div className="App">
         <div className="container">
           <Header />
-          <Form />
+          <Form addTodoFunc={this.addTodo}/>
           <div className="row">
             <div className="col-12 col-md-6">
               <TodoCount count={todoTasks.length} />
