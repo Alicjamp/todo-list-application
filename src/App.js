@@ -12,18 +12,20 @@ import TodoneCount from "./components/TodoneCount.js"
 class App extends React.Component {
   state = {
     tasks: [
-      { task: "Tech returners homework", important: true, complete: false, dueDate: "2019-12-02", id: 1 },
-      { task: "Put up Xmas tree", important: true, complete: false, dueDate: "2019-12-30", id: 2 },
-      { task: "Wrap presents", important: true, complete: true, dueDate: "2019-12-01", id: 3 },
-      { task: "Clean the house", important: false, complete: false, dueDate: "2019-12-22", id: 4 },
-      { task: "Food shopping", important: true, complete: true, dueDate: "2019-12-28", id: 5 },
-      { task: "Work overtime", important: true, complete: false, dueDate: "2019-12-25", id: 6 },
+      { task: "Tech returners homework", important: true, complete: false, dueDate: "2019-12-02", id: uuid() },
+      { task: "Put up Xmas tree", important: true, complete: false, dueDate: "2019-12-30", id: uuid() },
+      { task: "Wrap presents", important: true, complete: true, dueDate: "2019-12-01", id: uuid() },
+      { task: "Clean the house", important: false, complete: false, dueDate: "2019-12-22", id: uuid() },
+      { task: "Food shopping", important: true, complete: true, dueDate: "2019-12-28", id: uuid() },
+      { task: "Work overtime", important: true, complete: false, dueDate: "2019-12-25", id: uuid() },
     ]
   }
   // add task - form
   // delete task - todo and todone
   // complete task - todo
   // put line through todone?
+  // Split out CSS to components
+  // change colours to look less crappy
 
   addTodo = (task, dueDate, important) => {
     console.log(task, dueDate, important)
@@ -34,22 +36,28 @@ class App extends React.Component {
       dueDate: dueDate,
       id: uuid()
     }
-
     const copy = this.state.tasks.slice();
     copy.push(newTask)
     console.log(copy)
-
     this.setState({
       tasks: copy
     })
   }
 
-  render() {
+  deleteTask = (id) => {
+  const filterTasks = this.state.tasks.filter(task => {
+    return task.id !== id
+  })
+  console.log(filterTasks)
+  this.setState({
+    tasks: filterTasks
+  })
+  }
 
+  render() {
     const todoTasks = this.state.tasks.filter(todo => {
       return todo.complete === false
     })
-
     const todoneTasks = this.state.tasks.filter(todone => {
       return todone.complete === true
     })
@@ -58,7 +66,7 @@ class App extends React.Component {
       <div className="App">
         <div className="container">
           <Header />
-          <Form addTodoFunc={this.addTodo}/>
+          <Form addTodoFunc={this.addTodo} />
           <div className="row">
             <div className="col-12 col-md-6">
               <TodoCount count={todoTasks.length} />
@@ -68,11 +76,13 @@ class App extends React.Component {
                   <div className="row">
                     <div className="col-12">
                       <Todo
+                        deleteTaskFunc={this.deleteTask}
                         key={todo.id}
                         complete={todo.complete}
                         task={todo.task}
                         important={todo.important}
-                        dueDate={todo.dueDate} />
+                        dueDate={todo.dueDate}
+                        id={todo.id} />
                     </div>
                   </div>
                 )
@@ -86,11 +96,13 @@ class App extends React.Component {
                   <div className="row">
                     <div className="col-12">
                       <Todone
+                        deleteTaskFunc={this.deleteTask}
                         key={todone.id}
                         complete={todone.complete}
                         task={todone.task}
                         important={todone.important}
-                        dueDate={todone.dueDate} />
+                        dueDate={todone.dueDate} 
+                        id={todone.id} />
                     </div>
                   </div>
                 )
