@@ -1,4 +1,5 @@
 import React from "react";
+import '../components/Todone.css'
 
 class Todone extends React.Component {
     handleDelete = () => {
@@ -8,7 +9,7 @@ class Todone extends React.Component {
         return (
             <div className="row">
                 <div className="col-12 col-sm-9">
-                    <p>{this.props.task}</p>
+                    <p className="todone">{this.props.task}</p>
                 </div>
                 <div className="col-12 col-sm-3">
                     <button type="submit" onClick={this.handleDelete}> Delete</button>

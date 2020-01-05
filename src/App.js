@@ -31,7 +31,7 @@ class App extends React.Component {
     console.log(task, dueDate, important)
     const newTask = {
       task: task,
-      important: false,
+      important: important,
       complete: false,
       dueDate: dueDate,
       id: uuid()
@@ -45,13 +45,26 @@ class App extends React.Component {
   }
 
   deleteTask = (id) => {
-  const filterTasks = this.state.tasks.filter(task => {
-    return task.id !== id
-  })
-  console.log(filterTasks)
-  this.setState({
-    tasks: filterTasks
-  })
+    const filterTasks = this.state.tasks.filter(task => {
+      return task.id !== id
+    })
+    console.log(filterTasks)
+    this.setState({
+      tasks: filterTasks
+    })
+  }
+
+  completeTask = (id) => {
+    const newList = this.state.tasks.map(task => {
+      if (task.id == id) {
+        const updatedTask = { ...task, complete: true }
+        return updatedTask
+      }
+      return task
+    })
+    this.setState({
+      tasks: newList
+    })
   }
 
   render() {
@@ -68,7 +81,7 @@ class App extends React.Component {
           <Header />
           <Form addTodoFunc={this.addTodo} />
           <div className="row">
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-7">
               <TodoCount count={todoTasks.length} />
               <h2>Todo's</h2>
               {todoTasks.map(todo => {
@@ -77,6 +90,7 @@ class App extends React.Component {
                     <div className="col-12">
                       <Todo
                         deleteTaskFunc={this.deleteTask}
+                        completeTaskFunc={this.completeTask}
                         key={todo.id}
                         complete={todo.complete}
                         task={todo.task}
@@ -88,7 +102,7 @@ class App extends React.Component {
                 )
               })}
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-5">
               <TodoneCount count={todoneTasks.length} />
               <h2>Todone's</h2>
               {todoneTasks.map(todone => {
@@ -101,7 +115,7 @@ class App extends React.Component {
                         complete={todone.complete}
                         task={todone.task}
                         important={todone.important}
-                        dueDate={todone.dueDate} 
+                        dueDate={todone.dueDate}
                         id={todone.id} />
                     </div>
                   </div>

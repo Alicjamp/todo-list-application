@@ -19,9 +19,15 @@ class Form extends React.Component {
         })
     }
 
-    updateImportant = (event) => {
+    setLowPriority = (event) => {
         this.setState({
-            important: event.target.value
+            important: false
+        })
+    }
+
+    setHighPriority = (event) => {
+        this.setState({
+            important: true
         })
     }
 
@@ -34,15 +40,16 @@ class Form extends React.Component {
             this.state.important
         )
 
-        // event.preventDefault();
+        event.preventDefault();
     }
+
     render() {
         return (
             <div>
-                {/* <form> */}
+                <form>
                     <div className="container">
                         <div className="row">
-                            <div className="col-12 col-md-3">
+                            <div className="col-12 col-md-4">
                                 <label htmlFor="Todo">Todo</label><br></br>
                                 <input id="Todo" type="text" onChange={this.updateTask} value={this.state.task} placeholder="E.g. Take over the world" /><br></br>
                             </div>
@@ -52,15 +59,15 @@ class Form extends React.Component {
                             </div>
                             <div className="col-12 col-md-3">
                                 <label htmlFor="Priority">Priority</label><br></br>
-                                <label htmlFor="Low"><input id="Low" type="radio" name="Low-High" value="Low" selected /> Low</label>
-                                <label htmlFor="High"><input id="High" type="radio" name="Low-High" value="High" /> High</label>
+                                <label htmlFor="Low"><input onClick={this.setLowPriority} id="Low" type="radio" name="Low-High" value="Low" selected /> Low</label>
+                                <label htmlFor="High"><input onClick={this.setHighPriority} id="High" type="radio" name="Low-High" value="High" /> High</label>
                             </div>
-                            <div className="col-12 col-md-3">
+                            <div className="col-12 col-md-2">
                                 <button type="submit" onClick={this.addTodo} >Add</button>
                             </div>
                         </div>
                     </div>
-                    {/* </form> */}
+                    </form>
             </div>
 
         )

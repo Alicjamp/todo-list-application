@@ -4,6 +4,9 @@ class Todo extends React.Component {
     handleDelete = () => {
         this.props.deleteTaskFunc(this.props.id)
     }
+    handleUpdate = () => {
+        this.props.completeTaskFunc(this.props.id)
+    }
     render() {
         return (
             <div className="row">
@@ -22,7 +25,7 @@ class Todo extends React.Component {
                     <button type="submit" onClick={this.handleDelete}> Delete</button>
                 </div>
                 <div className="col-12 col-sm-2">
-                    <button type="submit">Done</button>
+                    <button type="submit" onClick={this.handleUpdate}> Done</button>
                 </div>
             </div>
         )
