@@ -56,7 +56,7 @@ class App extends React.Component {
 
   completeTask = (id) => {
     const newList = this.state.tasks.map(task => {
-      if (task.id == id) {
+      if (task.id === id) {
         const updatedTask = { ...task, complete: true }
         return updatedTask
       }

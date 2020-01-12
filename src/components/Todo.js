@@ -1,4 +1,5 @@
 import React from "react";
+import '../components/Todo.css'
 
 class Todo extends React.Component {
     handleDelete = () => {
@@ -11,11 +12,11 @@ class Todo extends React.Component {
         return (
             <div className="row">
                 <div className="col-12 col-sm-4">
-                    <p>{this.props.task}</p>
+                    <p className="todo">{this.props.task}</p>
                 </div>
                 <div className="col-12 col-sm-1">
                     {this.props.important === true &&
-                        <p> <span className="flag">🚩</span></p>
+                        <p> <span role="img" aria-label="flag">🚩</span></p>
                     }
                 </div>
                 <div className="col-12 col-sm-3">
