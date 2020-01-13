@@ -49,11 +49,11 @@ class Form extends React.Component {
                 <form>
                     <div className="container">
                         <div className="row">
-                            <div className="col-12 col-md-4">
+                            <div className="col-12 col-md-5">
                                 <label htmlFor="Todo">Todo</label><br></br>
                                 <input id="Todo" type="text" onChange={this.updateTask} value={this.state.task} placeholder="E.g. Take over the world" /><br></br>
                             </div>
-                            <div className="col-12 col-md-3">
+                            <div className="col-12 col-md-2">
                                 <label htmlFor="Due by date">Due by date</label><br></br>
                                 <input type="date" onChange={this.updateDueDate} value={this.state.dueDate} /><br></br>
                             </div>
@@ -62,7 +62,7 @@ class Form extends React.Component {
                                 <label htmlFor="Low"><input onClick={this.setLowPriority} id="Low" type="radio" name="Low-High" value="Low" selected /> Low</label>
                                 <label htmlFor="High"><input onClick={this.setHighPriority} id="High" type="radio" name="Low-High" value="High" /> High</label>
                             </div>
-                            <div className="col-12 col-md-2">
+                            <div className="col-12 col-md-1">
                                 <button type="submit" onClick={this.addTodo} >Add</button>
                             </div>
                         </div>

@@ -8,11 +8,11 @@ class Todone extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="col-12 col-sm-9">
+                <div className="col-12 col-sm-11">
                     <p className="todone">{this.props.task}</p>
                 </div>
-                <div className="col-12 col-sm-3">
-                    <button type="submit" onClick={this.handleDelete}> Delete</button>
+                <div className="col-12 col-sm-1">
+                    <button type="submit" onClick={this.handleDelete}><i class="fa fa-trash"></i></button>
                 </div>
             </div>
         )

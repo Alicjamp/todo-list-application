@@ -83,7 +83,7 @@ class App extends React.Component {
           <div className="row">
             <div className="col-12 col-md-7">
               <TodoCount count={todoTasks.length} />
-              <h2>Todo's</h2>
+              {/* <h2>Todo's</h2> */}
               {todoTasks.map(todo => {
                 return (
                   <div className="row">
@@ -104,7 +104,7 @@ class App extends React.Component {
             </div>
             <div className="col-12 col-md-5">
               <TodoneCount count={todoneTasks.length} />
-              <h2>Todone's</h2>
+              {/* <h2>Todone's</h2> */}
               {todoneTasks.map(todone => {
                 return (
                   <div className="row">

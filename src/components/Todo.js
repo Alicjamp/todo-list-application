@@ -11,7 +11,7 @@ class Todo extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="col-12 col-sm-4">
+                <div className="col-12 col-sm-6">
                     <p className="todo">{this.props.task}</p>
                 </div>
                 <div className="col-12 col-sm-1">
@@ -22,11 +22,11 @@ class Todo extends React.Component {
                 <div className="col-12 col-sm-3">
                     <p>{this.props.dueDate}</p>
                 </div>
-                <div className="col-12 col-sm-2">
-                    <button type="submit" onClick={this.handleDelete}> Delete</button>
+                <div className="col-12 col-sm-1">
+                    <button type="submit" onClick={this.handleDelete}><i class="fa fa-trash"></i></button>
                 </div>
-                <div className="col-12 col-sm-2">
-                    <button type="submit" onClick={this.handleUpdate}> Done</button>
+                <div className="col-12 col-sm-1">
+                    <button type="submit" onClick={this.handleUpdate}><i class="fa fa-check-square" aria-hidden="true"></i></button>
                 </div>
             </div>
         )
