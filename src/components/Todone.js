@@ -12,7 +12,7 @@ class Todone extends React.Component {
                     <p className="todone">{this.props.task}</p>
                 </div>
                 <div className="col-12 col-sm-1">
-                    <button type="submit" onClick={this.handleDelete}><i class="fa fa-trash"></i></button>
+                    <button type="submit" onClick={this.handleDelete}><i className="fa fa-trash"></i></button>
                 </div>
             </div>
         )

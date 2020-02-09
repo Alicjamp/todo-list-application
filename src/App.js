@@ -1,5 +1,5 @@
 import React from 'react';
-import uuid from "uuid/v4";
+import axios from "axios";
 import './App.css';
 import './components/Style.css'
 import Header from "./components/Header.js"
@@ -11,68 +11,108 @@ import TodoneCount from "./components/TodoneCount.js"
 
 class App extends React.Component {
   state = {
-    tasks: [
-      { task: "Tech returners homework", important: true, complete: false, dueDate: "2019-12-02", id: uuid() },
-      { task: "Put up Xmas tree", important: true, complete: false, dueDate: "2019-12-30", id: uuid() },
-      { task: "Wrap presents", important: true, complete: true, dueDate: "2019-12-01", id: uuid() },
-      { task: "Clean the house", important: false, complete: false, dueDate: "2019-12-22", id: uuid() },
-      { task: "Food shopping", important: true, complete: true, dueDate: "2019-12-28", id: uuid() },
-      { task: "Work overtime", important: true, complete: false, dueDate: "2019-12-25", id: uuid() },
-    ]
-  }
+    todos: []
+  };
   // add task - form
   // delete task - todo and todone
   // complete task - todo
   // put line through todone?
   // Split out CSS to components
-  // change colours to look less crappy
+
+  componentDidMount() {
+    // Fetch the todos making a GET request
+    axios.get("https://qfsnx6z149.execute-api.eu-west-1.amazonaws.com/dev/todos")
+      .then((response) => {
+        const todos = response.data.todos;
+        this.setState({
+          todos: todos
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   addTodo = (task, dueDate, important) => {
-    console.log(task, dueDate, important)
     const newTask = {
       task: task,
       important: important,
-      complete: false,
+      completed: false,
       dueDate: dueDate,
-      id: uuid()
-    }
-    const copy = this.state.tasks.slice();
-    copy.push(newTask)
-    console.log(copy)
-    this.setState({
-      tasks: copy
-    })
+    };
+
+      axios.post("https://qfsnx6z149.execute-api.eu-west-1.amazonaws.com/dev/todos", newTask)
+      .then((response) => {
+        const newTodo = response.data;
+        const copyOfTodos = this.state.todos.slice();
+        copyOfTodos.push(newTodo);
+
+        this.setState({
+          todos: copyOfTodos
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+    });
   }
 
   deleteTask = (id) => {
-    const filterTasks = this.state.tasks.filter(task => {
-      return task.id !== id
+    axios.delete(`https://qfsnx6z149.execute-api.eu-west-1.amazonaws.com/dev/todos/${id}`)
+    .then(() => {
+      const filteredTasks = this.state.todos.filter(todo => {
+        if (todo.taskID === id) return false;
+        else return true;
+      });
+      this.setState({
+        todos: filteredTasks
+      });
     })
-    console.log(filterTasks)
-    this.setState({
-      tasks: filterTasks
-    })
-  }
+    .catch((err) => {
+      console.log(err);
+    });
+  };
 
-  completeTask = (id) => {
-    const newList = this.state.tasks.map(task => {
-      if (task.id === id) {
-        const updatedTask = { ...task, complete: true }
-        return updatedTask
-      }
-      return task
+  // completeTask = (id) => {
+  //   const newList = this.state.tasks.map(task => {
+  //     if (task.id === id) {
+  //       const updatedTask = { ...task, complete: true }
+  //       return updatedTask
+  //     }
+  //     return task
+  //   })
+  //   this.setState({
+  //     tasks: newList
+  //   })
+  // }
+
+  completeTask = id => {
+    // Mark task (complete=true)
+    axios.put(`https://qfsnx6z149.execute-api.eu-west-1.amazonaws.com/dev/todos/${id}`, {
+      completed: true
     })
-    this.setState({
-      tasks: newList
-    })
+      .then(() => {
+        const updatedTasks= this.state.todos.map(todo => {
+          if (todo.taskID === id) {
+            todo.completed = true;
+          }
+          return todo;
+        });
+
+        this.setState({
+          todos: updatedTasks
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
-    const todoTasks = this.state.tasks.filter(todo => {
-      return todo.complete === false
+    const todoTasks = this.state.todos.filter(todo => {
+      return todo.completed === false
     })
-    const todoneTasks = this.state.tasks.filter(todone => {
-      return todone.complete === true
+    const todoneTasks = this.state.todos.filter(todone => {
+      return todone.completed === true
     })
 
     return (
@@ -91,12 +131,12 @@ class App extends React.Component {
                       <Todo
                         deleteTaskFunc={this.deleteTask}
                         completeTaskFunc={this.completeTask}
-                        key={todo.id}
-                        complete={todo.complete}
-                        task={todo.task}
+                        key={todo.taskID}
+                        complete={todo.completed}
+                        task={todo.text}
                         important={todo.important}
                         dueDate={todo.dueDate}
-                        id={todo.id} />
+                        id={todo.taskID} />
                     </div>
                   </div>
                 )
@@ -111,12 +151,12 @@ class App extends React.Component {
                     <div className="col-12">
                       <Todone
                         deleteTaskFunc={this.deleteTask}
-                        key={todone.id}
-                        complete={todone.complete}
-                        task={todone.task}
+                        key={todone.taskID}
+                        complete={todone.completed}
+                        task={todone.text}
                         important={todone.important}
                         dueDate={todone.dueDate}
-                        id={todone.id} />
+                        id={todone.taskID} />
                     </div>
                   </div>
                 )

@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import '../components/Todo.css'
 
 class Todo extends React.Component {
@@ -20,13 +21,13 @@ class Todo extends React.Component {
                     }
                 </div>
                 <div className="col-12 col-sm-3">
-                    <p>{this.props.dueDate}</p>
+                    <p>{moment(this.props.dueDate).format("Do MMM YY")}</p>
                 </div>
                 <div className="col-12 col-sm-1">
-                    <button type="submit" onClick={this.handleDelete}><i class="fa fa-trash"></i></button>
+                    <button type="submit" onClick={this.handleDelete}><i className="fa fa-trash"></i></button>
                 </div>
                 <div className="col-12 col-sm-1">
-                    <button type="submit" onClick={this.handleUpdate}><i class="fa fa-check-square" aria-hidden="true"></i></button>
+                    <button type="submit" onClick={this.handleUpdate}><i className="fa fa-check-square" aria-hidden="true"></i></button>
                 </div>
             </div>
         )
