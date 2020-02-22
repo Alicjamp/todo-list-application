@@ -1,9 +1,13 @@
 import React from "react";
+import 'moment-timezone';
+import moment from 'moment-timezone';
+import '../components/Form.css'
+
 class Form extends React.Component {
     state = {
         task: "",
         important: false,
-        dueDate: "2020-01-01",
+        dueDate: moment().format("YYYY-MM-DD"),
     }
 
     updateTask = (event) => {
@@ -59,11 +63,11 @@ class Form extends React.Component {
                             </div>
                             <div className="col-12 col-md-3">
                                 <label htmlFor="Priority">Priority</label><br></br>
-                                <label htmlFor="Low"><input onClick={this.setLowPriority} id="Low" type="radio" name="Low-High" value="Low" selected /> Low</label>
+                                <label htmlFor="Low"><input onClick={this.setLowPriority} id="Low" type="radio" name="Low-High" value="Low" selected /> Low</label><br></br>
                                 <label htmlFor="High"><input onClick={this.setHighPriority} id="High" type="radio" name="Low-High" value="High" /> High</label>
                             </div>
                             <div className="col-12 col-md-1">
-                                <button type="submit" onClick={this.addTodo} >Add</button>
+                                <button type="submit" className="add" onClick={this.addTodo} >Add</button>
                             </div>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ class App extends React.Component {
 
   addTodo = (task, dueDate, important) => {
     const newTask = {
-      task: task,
+      text: task,
       important: important,
       completed: false,
       dueDate: dueDate,
@@ -86,6 +86,7 @@ class App extends React.Component {
   // }
 
   completeTask = id => {
+    console.log(id)
     // Mark task (complete=true)
     axios.put(`https://qfsnx6z149.execute-api.eu-west-1.amazonaws.com/dev/todos/${id}`, {
       completed: true
@@ -93,7 +94,8 @@ class App extends React.Component {
       .then(() => {
         const updatedTasks= this.state.todos.map(todo => {
           if (todo.taskID === id) {
-            todo.completed = true;
+            const updatedTask = { ...todo, completed: true }
+            return updatedTask;
           }
           return todo;
         });

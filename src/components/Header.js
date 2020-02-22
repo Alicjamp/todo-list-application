@@ -5,7 +5,7 @@ class Header extends React.Component {
         return (
             <div>
                 <h1 className="title"> G.Y.S.T.List </h1>
-                <p>Either you've already got all your <span role="img" aria-label="poo">💩</span>together, or you want to add your list of s*** to do &#x2193;</p>
+                <p>Either you've already got all your <span role="img" aria-label="poo" className="poo">💩</span>ogether, or you want to add your list of s*** to do &#x2193;</p>
             </div>
         )
     }

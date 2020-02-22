@@ -12,8 +12,13 @@ button {
     margin: 5px;
     color: white;
     text-align: center;
-    border-radius: 50%;
+    border-radius: 15%;
 }
+
+button:hover {
+    background-color: rgb(122, 36, 86);
+  }
+
 @media only screen and (max-width: 1000px){
     body {
         font-size: 150%;
@@ -38,7 +43,7 @@ form {
 }
 
 .poo {
-    font-size: 50px ;
+    font-size: 40px ;
 }
 
 #sub {
