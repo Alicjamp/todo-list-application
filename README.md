@@ -1,5 +1,4 @@
-
-Todo Application - Frontend
+## Todo Application - Frontend
 This is the front end of a Todo Application, built throughout the Tech Returners Your Journey Into Tech course. It integrates with a backend, available here.
 
 The hosted version of the application is available here: https://alicjamp.github.io/todo-list-application/.
