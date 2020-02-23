@@ -13,11 +13,6 @@ class App extends React.Component {
   state = {
     todos: []
   };
-  // add task - form
-  // delete task - todo and todone
-  // complete task - todo
-  // put line through todone?
-  // Split out CSS to components
 
   componentDidMount() {
     // Fetch the todos making a GET request
@@ -72,23 +67,11 @@ class App extends React.Component {
     });
   };
 
-  // completeTask = (id) => {
-  //   const newList = this.state.tasks.map(task => {
-  //     if (task.id === id) {
-  //       const updatedTask = { ...task, complete: true }
-  //       return updatedTask
-  //     }
-  //     return task
-  //   })
-  //   this.setState({
-  //     tasks: newList
-  //   })
-  // }
-
   completeTask = id => {
     console.log(id)
     // Mark task (complete=true)
     axios.put(`https://qfsnx6z149.execute-api.eu-west-1.amazonaws.com/dev/todos/${id}`, {
+      
       completed: true
     })
       .then(() => {
@@ -113,6 +96,11 @@ class App extends React.Component {
     const todoTasks = this.state.todos.filter(todo => {
       return todo.completed === false
     })
+
+    const sortedImportant = todoTasks.sort(function(task1, task2) {
+      return Number(task2.important) - Number(task1.important);
+    })
+
     const todoneTasks = this.state.todos.filter(todone => {
       return todone.completed === true
     })
@@ -126,7 +114,7 @@ class App extends React.Component {
             <div className="col-12 col-md-7">
               <TodoCount count={todoTasks.length} />
               {/* <h2>Todo's</h2> */}
-              {todoTasks.map(todo => {
+              {sortedImportant.map(todo => {
                 return (
                   <div className="row">
                     <div className="col-12">

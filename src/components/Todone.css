@@ -1,6 +1,9 @@
 .todone{
-    background-color: white;
     font-family: 'Rock Salt', cursive;
-    color: #39FF14;
+    color: rgba(44, 156, 24, 0.589);
     text-decoration: line-through;
     }
+
+    .todones{
+        padding-top:15px ;
+         }

@@ -7,7 +7,7 @@ class Todone extends React.Component {
     }
     render() {
         return (
-            <div className="row">
+            <div className="row todones">
                 <div className="col-12 col-sm-11">
                     <p className="todone">{this.props.task}</p>
                 </div>

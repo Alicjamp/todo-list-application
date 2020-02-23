@@ -1,6 +1,6 @@
 body {
     font-family: 'Rock Salt', cursive;
-    background-color: white;
+    background-color: #DCDCDC;
     color: #FF66CC;
     }
 
@@ -27,12 +27,16 @@ button:hover {
 
 form {
     font-family: 'Permanent Marker', cursive;
-    background-color:white;
+    background-color:rgb(248, 246, 246);
     color: #373737;
     margin: 5px 5px 40px 5px;
     padding: 5px 5px 5px 5px;
     box-shadow:0 0 10px ;
     }
+
+input {
+    width: 100%;
+}
 
 .title {
     margin: 10px 5px 5px 5px;
@@ -49,4 +53,5 @@ form {
 #sub {
     font-family: 'Rock Salt', cursive;
     color: #373737;
+    padding-bottom: 50px;
 }

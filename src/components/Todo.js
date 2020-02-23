@@ -11,7 +11,7 @@ class Todo extends React.Component {
     }
     render() {
         return (
-            <div className="row">
+            <div className="row todos">
                 <div className="col-12 col-sm-6">
                     <p className="todo">{this.props.task}</p>
                 </div>
